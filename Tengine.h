@@ -1,3 +1,43 @@
+struct tetramino_body{
+
+        int block_orientation[4];
+        int core_y;
+        int core_x;
+}
+typedef struct tetramino_body tbody;
+
+struct tetramino{
+
+        char tetramino_type;
+        tbody cord;
+};
+
+struct tetramino_queue_node{
+
+	tetramino one;
+	tetramino_queue_node* next;
+};
+typedef struct tetramino_queue_node tqueue_node;
+
+struct tetramino_queue{
+
+	tqueue_node *head;
+	tqueue_node *tail;
+};
+typedef struct tetramino_queue* tqueue;
+
+
+int new_tetramino_queue( tqueue *coda);
+
+int add_in_tetramino_queue( tqueue *coda, char block_type_name);
+
+int dequeue_tetramino( tqueue *coda, vwin schermo);
+
+int end_tetramino_queue( tqueue *coda);
+
+
+
+
 struct block{
 
 	int block;
@@ -5,31 +45,30 @@ struct block{
 };
 typedef struct block block;
 
-struct node_block_y{
+struct node_block{
 
 	block info;
-	struct node_block_y *down;
-	struct node_block_y *up;
+	struct node_block *right;
+	struct node_block *left;
+	struct node_block *down;
+	struct node_up *up;
 };
-typedef struct node_block_y nblock_y;
-
-struct node_block_x{
-
-	block info;
-	struct node_block_x *right;
-	struct node_block_x *left;
-	nblock_y *down;
-};
-typedef struct node_block_x nblock_x;
+typedef struct node_block nblock;
 
 struct virtual_window{
 
-	nblock_x *head_x;
-	nblock_x *tail_x;
-	nblock_x *search_x;
+	nblock *head_x;
+	nblock *tail_x;
 
-	nblock_y *tail_y;
-	nblock_y *search_y;
+	nblock *tail_y;
+	nblock *tail_y_max;
+
+	nblock *search;
+
+	nblock *block_center;
+	nblock *block_piece_1;
+	nblock *block_piece_2;
+	nblock *block_piece_3;
 };
 typedef struct virtual_window* vwin;
 
@@ -40,56 +79,19 @@ int size_increase_virtual_window( int max_y, int max_x, vwin *schermo);
 
 int size_decrease_virtual_window( int max_y, int max_x, vwin *schermo);
 
-int check_block( int wanted_y, int wanted_x, int max_y, int max_x, vwin *schermo);
+int check_line( int max_y, int max_x, vwin *schermo);
 
-int mod_block( int new_block, int wanted_y, int wanted_x, int max_y, int max_x, vwin *schermo);
+int delete_line( int wanted_line_y, vwin schermo);
+
+int shift_line( int wanted_line_y, vwin schermo);
+
+block create_block( binfo type, int max_y, int max_x, vwin *schermo);
+
+block shift_block( binfo type, int shift_type, int max_y, int max_x, vwin *schermo);
+
+block rotate_block( binfo type, int rotation_type, int max_y, int max_x, vwin *schermo);
 
 int end_virtual_window( vwin *schermo);
-
-
-
-struct block_piece{
-
-	int piece_x[4];
-	int piece_y[4];
-};
-typedef struct block_piece bpiece;
-
-struct block_body{
-
-	bpiece[3];
-	int center_y;
-	int center_x;
-}
-typedef struct block_body bbody;
-
-struct block_type{
-
-	char block_type_name;
-	bbody cord;
-};
-
-struct block_queue_node{
-
-	block_type n;
-	block_queue_node* next;
-};
-
-struct block_queue{
-
-	block_queue_node *head;
-	block_queue_node *tail;
-};
-typedef struct block_queue* bqueue;
-
-
-int new_block_queue( bqueue *coda);
-
-int add_in_block_queue( bqueue *coda, block_type n);
-
-int dequeue_block( bqueue *coda, vwin);
-
-int end_block_queue( bqueue *coda);
 
 
 
@@ -103,14 +105,14 @@ struct player_score{
 struct player_scores{
 
 	player_score pscore;
-	struct player_scores *next;
+	struct player_scores *under;
 };
 typedef struct player_scores pscores;
 
 struct node_player{
 
 	char nickname[20];
-	pscores *next;
+	pscores *under;
 	struct node_player *next;
 };
 typedef struct node_player nplayer;
@@ -119,8 +121,6 @@ struct player_list{
 
 	nplayer *head;
 	nplayer *tail;
-	nplayer *search;
-	player_scores *pssearch;
 };
 typedef struct player_list plist;
 

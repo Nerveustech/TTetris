@@ -124,24 +124,23 @@ void game( int *a, int My, int Mx){
 		WINDOW* blockprevwin= newwin( (My/2)-(My/3), (Mx/2)-(Mx/3)-5, (My/3)-(My/4)+3, (Mx/2)-(Mx/4));
 
 		box( blockprevwin, 0, 0);
-
-		mvprintw( (My/3)-(My/4)+2, (Mx/2)-(Mx/4), "Block preview" );
+		mvwprintw( blockprevwin, 0, 2, "Block preview");
 		wrefresh( blockprevwin);
 
 
-		WINDOW* pausemenu= newwin( My/4, Mx/4, (My/3), (Mx/2)-(Mx/3)-4);
+		WINDOW* pausemenu= newwin( 7, 16, (My/3)+2,(Mx/2)-33);
 
 		int pMy, pMx;
 		box( pausemenu, 0, 0);
 		getmaxyx( pausemenu, pMy, pMx);
 
-		mvwprintw( pausemenu, 2, (pMx/2)-5, "Pause Menu");
-		mvwchgat( pausemenu, 2, (pMx/2)-5, 10, A_BOLD, 1, NULL);
+		mvwprintw( pausemenu, 1, (pMx/2)-5, "Pause Menu");
+		mvwchgat( pausemenu, 1, (pMx/2)-5, 10, A_BOLD, 1, NULL);
 
-		mvwprintw( pausemenu, 4, (pMx/2)-(pMx/3), "Resume  ");
-		mvwchgat( pausemenu, 4, (pMx/2)-(pMx/3), 9, A_REVERSE, 3, NULL);
+		mvwprintw( pausemenu, 3, (pMx/2)-(pMx/3), "Resume  ");
+		mvwchgat( pausemenu, 3, (pMx/2)-(pMx/3), 9, A_REVERSE, 3, NULL);
 
-		mvwprintw( pausemenu, 5, (pMx/2)-(pMx/3), "Exit    ");
+		mvwprintw( pausemenu, 4, (pMx/2)-(pMx/3), "Exit    ");
 //		mvwchgat( pausemenu, 5, (pMx/2)-15, 9, A_BOLD, 2, NULL);
 
 		wrefresh( pausemenu);
@@ -182,6 +181,7 @@ int main(){
 	initscr();
 	start_color();
 	noecho();
+	curs_set(0);
 
         init_pair(1, COLOR_YELLOW, 0);
         init_pair(2, COLOR_GREEN, 0);
