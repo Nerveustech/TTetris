@@ -28,6 +28,6 @@ done
 echo Controllo e installazione delle librerie completati.
 echo Inizio compilazione del TerminalTetris!
 gcc Tengine_core.c -c -g
-gcc Tengine_scoreboardtest.c -c -g
-gcc TProject_main01.c Tengine_core.o Tengine_scoreboardtest.o -lcurses -lSDL2 -lSDL2_mixer -g -o TTetris
+gcc Tengine_scoreboard.c -c -g
+gcc TProject_main01.c Tengine_core.o Tengine_scoreboard.o -lcurses -lSDL2 -lSDL2_mixer -g -o TTetris
 echo compilazione finita, buon divertimento :D
