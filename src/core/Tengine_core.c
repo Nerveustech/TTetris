@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <time.h>
-#include "Tengine_core.h"
-
+#include "../../include/core/Tengine_core.h"
 
 // Funzione di debbug, per convertire char in types
 types gettype(){

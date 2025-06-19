@@ -4,8 +4,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <math.h>
-#include "Tengine_core.h"
-#include "Tengine_scoreboard.h"
+#include "../../include/core/Tengine_core.h"
+#include "../../include/core/Tengine_scoreboard.h"
+
 
 void menu( int *a, int *My, int *Mx){
 
