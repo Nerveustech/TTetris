@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ncurses.h>
-#include "Tengine_scoreboard.h"
+#include "../../include/core/Tengine_scoreboard.h"
+
 
 void savescore( int score){
 
